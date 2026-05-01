@@ -1,0 +1,25 @@
+body {
+  text-align: center;
+}
+
+#sheetButtons {
+  margin: 10px;
+}
+
+button {
+  margin: 3px;
+  padding: 5px 10px;
+}
+
+button.active {
+  background: yellow;
+}
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 5px 10px;
+}
