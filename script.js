@@ -25,17 +25,20 @@ export async function initData() {
     const months = ["합계", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 
     for (const m of months) {
-        for (let i = 0; i < 5; i++) {
-            const ref = doc(db, "volunteer", currentYear, "months", m, "rows", String(i));
 
-            await setDoc(ref, {
-                name: `이름${i}`,
-                date: `날짜${i}`,
-                time: "",
-                study: "",
-                memo: ""
-            });
-        }
+        // ⭐ 이거 추가 (상위 문서 생성)
+        const monthRef = doc(db, "volunteer", currentYear, "months", m);
+        await setDoc(monthRef, { created: true }, { merge: true });
+
+     for (let i = 0; i < 31; i++) {
+    const ref = doc(db, "volunteer", currentYear, "months", m, "rows", String(i));
+
+    await setDoc(ref, {
+        time: "",
+        study: "",
+        memo: ""
+    });
+}
     }
 }
 
@@ -72,7 +75,11 @@ export async function getAllData() {
         const snapshot = await getDocs(colRef);
 
         snapshot.forEach(doc => {
-            allRows.push({ ...doc.data() });
+            allRows.push({
+                month: m,      // ⭐ 이거 추가
+                id: doc.id,    // ⭐ 이것도 추가 (중요)
+                ...doc.data()
+            });
         });
     }
 
@@ -81,6 +88,15 @@ export async function getAllData() {
 
 /* 저장 */
 export async function saveRow(sheet, docId, newData) {
-    const ref = doc(db, "volunteer", currentYear, "months", sheet, "rows", docId);
-    await setDoc(ref, newData);
+    const ref = doc(
+        db,
+        "volunteer",
+        currentYear,
+        "months",
+        sheet,
+        "rows",
+        String(docId)   // ⭐ 무조건 문자열
+    );
+
+    await setDoc(ref, newData, { merge: true }); // ⭐ 덮어쓰기 방지
 }
