@@ -1,19 +1,105 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>ServiceReport</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1 id="mainTitle">로딩중...</h1>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>봉사보고</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+
+<body>
+
+  <div id="container">
+
+    <h1 id="mainTitle"></h1>
+
 
     <div id="sheetButtons"></div>
 
-    <table border="1" id="volunteerTable"></table>
 
-    <!-- 🔥 여기 중요 -->
-    <script type="module" src="ui.js"></script>
+    <div id="yearBox">
 
-  </body>
+      <input
+        id="yearInput"
+        placeholder="연도 입력 (예: 2026)"
+      >
+
+      <button onclick="saveYear()">
+        연도 변경
+      </button>
+
+
+      <button
+        id="resetMonthBtn"
+        onclick="resetCurrentMonth()"
+      >
+        현재 월 초기화
+      </button>
+
+    </div>
+
+
+    <div id="tableWrapper">
+
+
+      <!-- =================================================
+           합계
+      ================================================= -->
+
+      <div
+        id="totalTableWrap"
+        style="display:none;"
+      >
+
+        <table id="totalHeaderTable"></table>
+
+
+        <div id="totalScroll">
+
+          <table id="totalBodyTable"></table>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================================================
+           월
+      ================================================= -->
+
+      <div
+        id="monthTableWrap"
+        style="display:none;"
+      >
+
+        <table id="monthHeaderTable"></table>
+
+        <table id="monthBodyTable"></table>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+
 </html>
