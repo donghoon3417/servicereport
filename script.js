@@ -10,7 +10,7 @@
 // ============================================================
 
 const API_URL =
-  "여기에_새로운_Apps_Script_웹앱_URL_입력";
+  "https://script.google.com/macros/s/AKfycbzimtDx26JMfFfrVr4wQg_nEtNxqG_gGcBmGHVjS0kxh9RpOHAE1UouHboDhXzL5ps3Cg/exec";
 
 
 // ============================================================
